@@ -73,22 +73,30 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
       const updatedOffer = action.payload;
 
+      // 1. Обновляем в общем списке offers
       const offerIndex = state.offers.findIndex((item) => item.id === updatedOffer.id);
       if (offerIndex !== -1) {
         state.offers[offerIndex] = updatedOffer;
       }
 
+      // 2. Обновляем в списке сопутствующих предложений (otherOffers)
       const otherIndex = state.otherOffers.findIndex((item) => item.id === updatedOffer.id);
       if (otherIndex !== -1) {
         state.otherOffers[otherIndex] = updatedOffer;
       }
 
+      // 3. Обновляем текущее открытое предложение
       if (state.currentOffer?.id === updatedOffer.id) {
         state.currentOffer = updatedOffer;
       }
-
+      // 4. Безопасное обновление списка избранного (исключает дубликаты)
       if (updatedOffer.isFavorite) {
-        state.favorites.push(updatedOffer);
+        const favoriteIndex = state.favorites.findIndex((item) => item.id === updatedOffer.id);
+        if (favoriteIndex === -1) {
+          state.favorites.push(updatedOffer);
+        } else {
+          state.favorites[favoriteIndex] = updatedOffer;
+        }
       } else {
         state.favorites = state.favorites.filter((item) => item.id !== updatedOffer.id);
       }
