@@ -8,6 +8,8 @@ import PlaceCardsList from '../../components/place-card/place-cards-list';
 import Map from '../../components/map/map';
 import SortBar from './components/sort-bar';
 import MainEmpty from './components/main-empty';
+import { getCurrentCity } from '../../store/app-process/app-process.selectors';
+import { getOffers } from '../../store/data-process/data-process.selectors';
 
 function MainPage (): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<TOffer>();
@@ -15,8 +17,8 @@ function MainPage (): JSX.Element {
     setActiveOffer(offer);
   };
 
-  const currentCity = useAppSelector((state) => state.APP.currentCity);
-  const offers: TOffer[] = useAppSelector((state) => state.DATA.offers);
+  const currentCity = useAppSelector(getCurrentCity);
+  const offers: TOffer[] = useAppSelector(getOffers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity.name);
   const [activeSort, setActiveSort] = useState(SortOption.Popular);
 

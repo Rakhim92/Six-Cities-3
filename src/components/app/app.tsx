@@ -14,11 +14,13 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import {useAppSelector, useAppDispatch} from '../../hooks/index.ts';
 import {fetchOffersAction, fetchFavoritesAction} from '../../store/api-actions.ts';
 import {useEffect} from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors.ts';
+import { getIsOffersDataLoading } from '../../store/data-process/data-process.selectors.ts';
 
 
 const App = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.DATA.isOffersDataLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

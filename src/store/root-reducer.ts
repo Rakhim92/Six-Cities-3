@@ -3,6 +3,7 @@ import { userProcess } from './user-process/user-process';
 import { appProcess } from './app-process/app-process';
 import { dataProcess } from './data-process/data-process';
 
+// Разбил reducer на три слайса
 export const rootReducer = combineReducers({
   USER: userProcess.reducer,
   APP: appProcess.reducer,

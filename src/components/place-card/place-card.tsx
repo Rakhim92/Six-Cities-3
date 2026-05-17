@@ -3,6 +3,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {TOffer} from '../../types';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {toggleFavoriteAction} from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 type TPlaceCardProps = {
   typeClassName: 'root' | 'offer' | 'favorites';
@@ -25,7 +26,7 @@ const getClassName = (typeClassName: string) => {
 
 function PlaceCard({typeClassName, offer, onHandleHover}: TPlaceCardProps) {
   const {id, title, previewImage, price, isPremium, isFavorite, type, rating} = offer;
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleMouseOn = () => {

@@ -2,6 +2,8 @@ import {Outlet, useLocation, Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
+import { getAuthInfo, getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { getFavorites } from '../../store/data-process/data-process.selectors';
 
 
 const getLayoutState = (pathname: AppRoute, favoriteCount: number) => {
@@ -27,9 +29,9 @@ const getLayoutState = (pathname: AppRoute, favoriteCount: number) => {
 export default function Layout() {
   const {pathname} = useLocation();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
-  const userEmail = useAppSelector((state) => state.USER.authInfo);
-  const favorites = useAppSelector((state) => state.DATA.favorites);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(getAuthInfo);
+  const favorites = useAppSelector(getFavorites);
 
   const {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter} = getLayoutState(pathname as AppRoute, favorites.length);
   const favoriteCount = favorites.length;

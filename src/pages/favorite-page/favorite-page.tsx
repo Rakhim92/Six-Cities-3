@@ -5,11 +5,12 @@ import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import PlaceCardsList from '../../components/place-card/place-cards-list';
 import FavoriteEmpty from './components/favorite-empty';
+import { getFavorites } from '../../store/data-process/data-process.selectors';
 
 type GroupedOffers = Record<string, TOffer[]>;
 
 const FavoritePage = (): JSX.Element => {
-  const favorites = useAppSelector((state) => state.DATA.favorites);
+  const favorites = useAppSelector(getFavorites);
 
   const groupedByCity = useMemo(() =>
     favorites.reduce<GroupedOffers>((acc, offer) => {

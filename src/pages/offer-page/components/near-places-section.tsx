@@ -1,9 +1,10 @@
 import PlaceCardsList from '../../../components/place-card/place-cards-list';
 import {useAppSelector} from '../../../hooks';
 import { useMemo } from 'react';
+import { getOtherOffers } from '../../../store/data-process/data-process.selectors';
 
 const NearPlacesSection = () => {
-  const otherOffers = useAppSelector((state) => state.DATA.otherOffers);
+  const otherOffers = useAppSelector(getOtherOffers);
   const limitedOffers = useMemo(() => otherOffers.slice(0, 3), [otherOffers]);
 
   return (

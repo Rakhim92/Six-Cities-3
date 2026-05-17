@@ -1,5 +1,7 @@
 import {AuthorizationStatus} from '../../../../const';
 import {useAppSelector} from '../../../../hooks';
+import { getComments } from '../../../../store/data-process/data-process.selectors';
+import { getAuthorizationStatus } from '../../../../store/user-process/user-process.selectors';
 import ReviewsForm from './reviews-form';
 import ReviewsList from './reviews-list';
 
@@ -9,8 +11,8 @@ type TCommentsProps = {
 }
 
 const ReviewsSection = ({urlId, onSuccess}: TCommentsProps):JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
-  const comments = useAppSelector((state) => state.DATA.comments);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const comments = useAppSelector(getComments);
   const commentsLength = comments.length;
 
   return (
