@@ -22,8 +22,8 @@ function OfferPage(): JSX.Element {
   const {id: urlId} = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentCity = useAppSelector((state) => state.APP.currentCity);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const [offer, setOffer] = useState<TOfferExtended | null>(null);
   const [nearbyOffers, setNearbyOffers] = useState<TOffer[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);

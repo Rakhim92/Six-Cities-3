@@ -9,7 +9,7 @@ import FavoriteEmpty from './components/favorite-empty';
 type GroupedOffers = Record<string, TOffer[]>;
 
 const FavoritePage = (): JSX.Element => {
-  const favorites = useAppSelector((state) => state.favorites);
+  const favorites = useAppSelector((state) => state.DATA.favorites);
 
   const groupedByCity = useMemo(() =>
     favorites.reduce<GroupedOffers>((acc, offer) => {

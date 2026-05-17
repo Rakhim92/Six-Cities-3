@@ -17,8 +17,8 @@ import {useEffect} from 'react';
 
 
 const App = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.DATA.isOffersDataLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

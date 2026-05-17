@@ -27,9 +27,9 @@ const getLayoutState = (pathname: AppRoute, favoriteCount: number) => {
 export default function Layout() {
   const {pathname} = useLocation();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userEmail = useAppSelector((state) => state.authInfo);
-  const favorites = useAppSelector((state) => state.favorites);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const userEmail = useAppSelector((state) => state.USER.authInfo);
+  const favorites = useAppSelector((state) => state.DATA.favorites);
 
   const {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter} = getLayoutState(pathname as AppRoute, favorites.length);
   const favoriteCount = favorites.length;

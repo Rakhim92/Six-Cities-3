@@ -25,7 +25,7 @@ const getClassName = (typeClassName: string) => {
 
 function PlaceCard({typeClassName, offer, onHandleHover}: TPlaceCardProps) {
   const {id, title, previewImage, price, isPremium, isFavorite, type, rating} = offer;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleMouseOn = () => {

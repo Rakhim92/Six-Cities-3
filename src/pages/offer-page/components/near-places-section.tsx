@@ -3,7 +3,7 @@ import {useAppSelector} from '../../../hooks';
 import { useMemo } from 'react';
 
 const NearPlacesSection = () => {
-  const otherOffers = useAppSelector((state) => state.otherOffers);
+  const otherOffers = useAppSelector((state) => state.DATA.otherOffers);
   const limitedOffers = useMemo(() => otherOffers.slice(0, 3), [otherOffers]);
 
   return (
