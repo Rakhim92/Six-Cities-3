@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus, USER_AUTH_DATA } from '../../const';
-import { requireAuthorization, saveAuthInfo } from '../action';
 
 const getSavedAuthInfo = (): string | null => {
   const data = localStorage.getItem(USER_AUTH_DATA);
@@ -20,17 +19,18 @@ const initialState: TUserProcess = {
 export const userProcess = createSlice({
   name: 'USER',
   initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder
-      .addCase(requireAuthorization, (state, action: PayloadAction<AuthorizationStatus>) => {
-        state.authorizationStatus = action.payload;
-        if (action.payload === AuthorizationStatus.NoAuth) {
-          state.authInfo = null;
-        }
-      })
-      .addCase(saveAuthInfo, (state, action: PayloadAction<string | null>) => {
-        state.authInfo = action.payload;
-      });
+  reducers: {
+    requireAuthorization: (state, action: PayloadAction<AuthorizationStatus>) => {
+      state.authorizationStatus = action.payload;
+      if (action.payload === AuthorizationStatus.NoAuth) {
+        state.authInfo = null;
+      }
+    },
+    saveAuthInfo: (state, action: PayloadAction<string | null>) => {
+      state.authInfo = action.payload;
+    }
   },
 });
+
+// Автоматически сгенерированные экшены
+export const { requireAuthorization, saveAuthInfo } = userProcess.actions;

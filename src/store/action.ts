@@ -1,15 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
-import {TCity, TOffer, TOfferExtended, TComment} from '../types';
-import {AuthorizationStatus, AppRoute} from '../const';
+import {AppRoute} from '../const';
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const saveAuthInfo = createAction<string | null>('auth/saveAuthInfo');
+// Этот экшен обрабатывается специальным middleware для навигации
 export const redirectToRoute = createAction<AppRoute>('user/redirectToRoute');
-export const loadOffers = createAction<TOffer[]>('data/loadOffers');
-export const setOffersLoadingStatus = createAction<boolean>('data/setOffersLoadingStatus');
-export const changeCurrentCity = createAction<TCity>('city/changeCurrentCity');
-export const changeOffers = createAction<TOffer[]>('offers/changeOffers');
-export const changeCurrentOffer = createAction<TOffer | TOfferExtended>('offer/changeCurrentOffer');
-export const loadFavorite = createAction<TOffer[]>('data/favorites');
-export const loadComments = createAction<TComment[]>('data/comments');
-export const loadOtherOffers = createAction<TOffer[]>('data/otherOffers');
+

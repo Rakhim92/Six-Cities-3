@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MY_CITIES } from '../../const';
 import { TCity } from '../../types';
-import { changeCurrentCity } from '../action';
 
 type TAppProcess = {
   currentCity: TCity;
@@ -14,11 +13,12 @@ const initialState: TAppProcess = {
 export const appProcess = createSlice({
   name: 'APP',
   initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder
-      .addCase(changeCurrentCity, (state, action: PayloadAction<TCity>) => {
-        state.currentCity = action.payload;
-      });
+  reducers: {
+    changeCurrentCity: (state, action: PayloadAction<TCity>) => {
+      state.currentCity = action.payload;
+    }
   },
 });
+
+// Автоматически сгенерированный экшен
+export const { changeCurrentCity } = appProcess.actions;

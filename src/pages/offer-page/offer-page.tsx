@@ -13,7 +13,7 @@ import NearPlacesSection from './components/near-places-section';
 import Map from '../../components/map/map';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {toggleFavoriteAction} from '../../store/api-actions';
-import {loadComments, loadOtherOffers} from '../../store/action';
+import {loadComments, loadOtherOffers} from '../../store/data-process/data-process';
 import { getCurrentCity } from '../../store/app-process/app-process.selectors';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 

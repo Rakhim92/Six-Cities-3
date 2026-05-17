@@ -1,6 +1,6 @@
 import {MY_CITIES} from '../../../const';
 import {useAppDispatch} from '../../../hooks';
-import {changeCurrentCity} from '../../../store/action';
+import {changeCurrentCity} from '../../../store/app-process/app-process';
 import {TCity} from '../../../types';
 
 type TCitiesList = {

@@ -1,17 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOffer, TOfferExtended, TComment } from '../../types';
 import { AuthorizationStatus } from '../../const';
-import {
-  changeOffers,
-  loadOffers,
-  setOffersLoadingStatus,
-  changeCurrentOffer,
-  loadFavorite,
-  loadComments,
-  loadOtherOffers,
-  requireAuthorization
-} from '../action';
 import { toggleFavoriteAction } from '../api-actions';
+import { requireAuthorization } from '../user-process/user-process';
 
 type TDataProcess = {
   offers: TOffer[];
@@ -34,31 +25,33 @@ const initialState: TDataProcess = {
 export const dataProcess = createSlice({
   name: 'DATA',
   initialState,
-  reducers: {},
+  reducers: {
+    changeOffers: (state, action: PayloadAction<TOffer[]>) => {
+      state.offers = action.payload;
+    },
+    loadOffers: (state, action: PayloadAction<TOffer[]>) => {
+      state.offers = action.payload;
+    },
+    setOffersLoadingStatus: (state, action: PayloadAction<boolean>) => {
+      state.isOffersDataLoading = action.payload;
+    },
+    changeCurrentOffer: (state, action: PayloadAction<TOffer | TOfferExtended | null>) => {
+      state.currentOffer = action.payload;
+    },
+    loadFavorite: (state, action: PayloadAction<TOffer[]>) => {
+      state.favorites = action.payload;
+    },
+    loadComments: (state, action: PayloadAction<TComment[]>) => {
+      state.comments = action.payload;
+    },
+    loadOtherOffers: (state, action: PayloadAction<TOffer[]>) => {
+      state.otherOffers = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
-      .addCase(changeOffers, (state, action: PayloadAction<TOffer[]>) => {
-        state.offers = action.payload;
-      })
-      .addCase(loadOffers, (state, action: PayloadAction<TOffer[]>) => {
-        state.offers = action.payload;
-      })
-      .addCase(setOffersLoadingStatus, (state, action: PayloadAction<boolean>) => {
-        state.isOffersDataLoading = action.payload;
-      })
-      .addCase(changeCurrentOffer, (state, action: PayloadAction<TOffer | TOfferExtended | null>) => {
-        state.currentOffer = action.payload;
-      })
-      .addCase(loadFavorite, (state, action: PayloadAction<TOffer[]>) => {
-        state.favorites = action.payload;
-      })
-      .addCase(loadComments, (state, action: PayloadAction<TComment[]>) => {
-        state.comments = action.payload;
-      })
-      .addCase(loadOtherOffers, (state, action: PayloadAction<TOffer[]>) => {
-        state.otherOffers = action.payload;
-      })
-      // Очищаем избранное, если пользователь разлогинился
+    // Очищаем избранное, если пользователь разлогинился
+      // Реагируем на экшен авторизации из другого слайса, чтобы очистить избранное
       .addCase(requireAuthorization, (state, action: PayloadAction<AuthorizationStatus>) => {
         if (action.payload === AuthorizationStatus.NoAuth) {
           state.favorites = [];
@@ -92,5 +85,16 @@ export const dataProcess = createSlice({
           state.favorites = state.favorites.filter((item) => item.id !== updatedOffer.id);
         }
       });
-  },
+  }
 });
+
+// Автоматически сгенерированные экшены
+export const {
+  changeOffers,
+  loadOffers,
+  setOffersLoadingStatus,
+  changeCurrentOffer,
+  loadFavorite,
+  loadComments,
+  loadOtherOffers
+} = dataProcess.actions;
