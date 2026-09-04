@@ -1,12 +1,23 @@
-name: Node CI
+name: Deploy static content to Pages
 
-on: [push] # Корневой объект (root) должен начинаться с настроек
+on:
+  push:
+    branches: ["main"] # Процесс запустится только при пуше в основную ветку
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-test: # Название задачи
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    steps: # И вот здесь, внутри steps, начинается список!
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -19,3 +30,18 @@ jobs:
         run: |
           npm cache clean --force
           npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist' # Папка, куда Vite собирает проект
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
