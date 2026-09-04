@@ -37,7 +37,7 @@ const App = (): JSX.Element => {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <HistoryRouter history={browserHistory} basename="/Six-Cities-3">
       <Routes>
         <Route
           path={AppRoute.Root}
