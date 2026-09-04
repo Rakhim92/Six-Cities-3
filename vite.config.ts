@@ -6,5 +6,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Six-Cities-3/', // Важно: косые черты с двух сторон!
+  base: './', // Важно: косые черты с двух сторон!
 });
