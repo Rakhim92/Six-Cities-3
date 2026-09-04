@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["main"] # Процесс запустится только при пуше в основную ветку
+    branches: ["master"] # Измените на "main", если ваша главная ветка называется main
 
 permissions:
   contents: read
@@ -24,12 +24,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22' # Обновили до актуальной Node.js 22, чтобы избежать ошибок окружения
+          cache: 'npm' # Умное кэширование зависимостей включено
 
       - name: Install dependencies
-        run: |
-          npm cache clean --force
-          npm ci
+        run: npm ci
 
       - name: Build project
         run: npm run build
@@ -40,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Папка, куда Vite собирает проект
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
