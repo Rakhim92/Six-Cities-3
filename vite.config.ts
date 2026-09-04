@@ -6,5 +6,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // Важно: косые черты с двух сторон!
+  base: process.env.NODE_ENV === 'production' ? '/Six-Cities-3/' : '/',
 });

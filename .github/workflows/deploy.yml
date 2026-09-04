@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["master"] # Измените на "main", если ваша главная ветка называется main
+    branches: ["master"] # Замените на "main", если ваша главная ветка называется main
 
 permissions:
   contents: read
@@ -16,7 +16,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,8 +23,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Обновили до актуальной Node.js 22, чтобы избежать ошибок окружения
-          cache: 'npm' # Умное кэширование зависимостей включено
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
