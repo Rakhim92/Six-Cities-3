@@ -17,6 +17,9 @@ import {useEffect} from 'react';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors.ts';
 import { getIsOffersDataLoading } from '../../store/data-process/data-process.selectors.ts';
 
+// Для локального сервера — '/', для GitHub Pages — имя репозитория
+const basename = process.env.NODE_ENV === 'production' ? '/Six-Cities-3' : '/';
+
 
 const App = (): JSX.Element => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -37,7 +40,7 @@ const App = (): JSX.Element => {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <HistoryRouter history={browserHistory} basename={basename}>
       <Routes>
         <Route
           path={AppRoute.Root}
